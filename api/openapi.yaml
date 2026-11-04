@@ -1,0 +1,904 @@
+openapi: 3.0.3
+info:
+  title: Alfred API
+  version: 1.0.0
+  description: Проектный контракт кейса TravelTech; сервер не реализован
+servers:
+- url: https://alfred.example
+  description: Условный адрес, не действующий сервис
+security:
+- userBearer: []
+paths:
+  /internal/flight-status-events:
+    post:
+      operationId: receiveStatusEvent
+      summary: Принять статус рейса
+      description: provider_id привязан к service token; неизвестный рейс сохраняется как unmatched
+      security:
+      - serviceBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusEvent'
+      responses:
+        '202':
+          description: Событие и задача сохранены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventReceipt'
+        '200':
+          description: 'Точный повтор: прежний record_id и текущий outcome'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventReceipt'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
+        '422':
+          $ref: '#/components/responses/422'
+        '503':
+          $ref: '#/components/responses/503'
+  /trips/{trip_id}:
+    parameters:
+    - name: trip_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getTrip
+      summary: Получить общий план и последствия
+      responses:
+        '200':
+          description: Текущая поездка участника
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+  /trips/{trip_id}/inbox:
+    parameters:
+    - name: trip_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getInbox
+      summary: Получить сообщения текущего участника
+      description: Сортировка created_at,id по возрастанию; cursor непрозрачный и привязан к trip/user
+      parameters:
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          maxLength: 512
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+      responses:
+        '200':
+          description: Страница сохранённых сообщений
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxPage'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+  /trips/{trip_id}/impacts/{impact_id}/alternatives:
+    parameters:
+    - name: trip_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: impact_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getAlternatives
+      summary: Получить состояние поиска и допустимые варианты
+      responses:
+        '200':
+          description: Состояние поиска, включая отказ интеграции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alternatives'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+  /trips/{trip_id}/selections:
+    parameters:
+    - name: trip_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: confirmSelection
+      summary: Сохранить выбранное изменение общего плана
+      description: Проверить can_confirm, revalidation, версии плана и исходных рейсов; бронирование отдельно
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectionRequest'
+      responses:
+        '200':
+          description: Новая версия или сохранённый результат повтора
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionResult'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '422':
+          $ref: '#/components/responses/422'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  securitySchemes:
+    userBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Проверенный пользовательский токен TravelTech
+    serviceBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Сервисный токен адаптера статусов с отдельной audience и provider_id
+  schemas:
+    FlightKey:
+      type: object
+      additionalProperties: false
+      required:
+      - operating_carrier
+      - flight_number
+      - departure_date
+      - origin
+      - destination
+      - scheduled_departure_local
+      properties:
+        operating_carrier:
+          type: string
+          pattern: ^[A-Z0-9]{2,3}$
+          example: AX
+        flight_number:
+          type: string
+          pattern: ^[1-9][0-9]{0,4}$
+          example: '101'
+        departure_date:
+          type: string
+          format: date
+          example: '2026-11-12'
+        origin:
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: LAX
+        destination:
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: SFO
+        scheduled_departure_local:
+          type: string
+          pattern: ^([01][0-9]|2[0-3]):[0-5][0-9]$
+          example: '14:30'
+      description: Неизменяемая идентичность рейса по исходному расписанию
+    StatusEvent:
+      type: object
+      additionalProperties: false
+      required:
+      - provider_id
+      - event_id
+      - flight_key
+      - stream_id
+      - revision
+      - observed_at
+      - status
+      - estimated_departure_at
+      - estimated_arrival_at
+      properties:
+        provider_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          example: demo-status
+        event_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: evt-42
+        flight_key:
+          $ref: '#/components/schemas/FlightKey'
+        stream_id:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 128
+          example: stream-1
+        revision:
+          type: integer
+          format: int64
+          nullable: true
+          minimum: 0
+          example: 8
+        observed_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          example: '2026-11-12T22:00:00Z'
+        status:
+          type: string
+          enum:
+          - scheduled
+          - delayed
+          - cancelled
+          - departed
+          - arrived
+        estimated_departure_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        estimated_arrival_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+          example: '2026-11-13T00:40:00Z'
+      description: received_at назначает сервер; null stream/revision требует сверки с источником
+    EventReceipt:
+      type: object
+      additionalProperties: false
+      required:
+      - record_id
+      - outcome
+      - received_at
+      properties:
+        record_id:
+          type: string
+          format: uuid
+        outcome:
+          type: string
+          enum:
+          - received
+          - unmatched
+          - pending_reconciliation
+          - applied
+          - ignored_stale
+          - conflict
+        received_at:
+          type: string
+          format: date-time
+          pattern: Z$
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          enum:
+          - unauthorized
+          - forbidden
+          - not_found
+          - invalid_request
+          - event_id_conflict
+          - idempotency_conflict
+          - version_conflict
+          - stale_offer
+          - offer_changed
+          - offer_expired
+          - offer_ineligible
+          - revalidation_unavailable
+          - storage_unavailable
+        message:
+          type: string
+        current_version:
+          type: integer
+          format: int64
+          minimum: 1
+    Member:
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - can_confirm
+      - baggage_kg
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        can_confirm:
+          type: boolean
+        baggage_kg:
+          type: integer
+          format: int64
+          minimum: 0
+    FlightState:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - key
+      - status
+      - scheduled_departure_at
+      - scheduled_arrival_at
+      - estimated_departure_at
+      - estimated_arrival_at
+      - origin_timezone
+      - destination_timezone
+      - state_version
+      - last_observed_at
+      - last_verified_at
+      - verification_state
+      properties:
+        id:
+          type: string
+          format: uuid
+        key:
+          $ref: '#/components/schemas/FlightKey'
+        status:
+          type: string
+          enum:
+          - scheduled
+          - delayed
+          - cancelled
+          - departed
+          - arrived
+        scheduled_departure_at:
+          type: string
+          format: date-time
+          pattern: Z$
+        scheduled_arrival_at:
+          type: string
+          format: date-time
+          pattern: Z$
+        estimated_departure_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        estimated_arrival_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        origin_timezone:
+          type: string
+          example: America/Los_Angeles
+        destination_timezone:
+          type: string
+          example: America/Los_Angeles
+        state_version:
+          type: integer
+          format: int64
+          minimum: 0
+        last_observed_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        last_verified_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        verification_state:
+          type: string
+          enum:
+          - confirmed
+          - pending_reconciliation
+          - unavailable
+    PlanItem:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - kind
+      - title
+      - flight_id
+      - predecessor_id
+      - starts_at
+      - ends_at
+      - latest_start_at
+      - timezone
+      - booking_status
+      properties:
+        id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+          enum:
+          - flight
+          - hotel
+          - transfer
+          - activity
+        title:
+          type: string
+        flight_id:
+          type: string
+          format: uuid
+          nullable: true
+        predecessor_id:
+          type: string
+          format: uuid
+          nullable: true
+        starts_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        ends_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        latest_start_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        timezone:
+          type: string
+        booking_status:
+          type: string
+          enum:
+          - booked
+          - needs_booking
+          - needs_change
+          - not_required
+      description: kind=flight требует flight_id, прочие виды требуют null; интервалы проверяются сервером
+    Impact:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - item_id
+      - source_flight_id
+      - source_state_version
+      - plan_version
+      - reason
+      - state
+      - explanation
+      - booking_action_required
+      properties:
+        id:
+          type: string
+          format: uuid
+        item_id:
+          type: string
+          format: uuid
+        source_flight_id:
+          type: string
+          format: uuid
+        source_state_version:
+          type: integer
+          format: int64
+          minimum: 1
+        plan_version:
+          type: integer
+          format: int64
+          minimum: 1
+        reason:
+          type: string
+          enum:
+          - flight_cancelled
+          - connection_missed
+          - window_missed
+          - needs_information
+        state:
+          type: string
+          enum:
+          - open
+          - needs_information
+          - resolved
+          - superseded
+        explanation:
+          type: string
+        booking_action_required:
+          type: boolean
+    Trip:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - title
+      - owner_id
+      - current_version
+      - currency
+      - members
+      - items
+      - flights
+      - impacts
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        owner_id:
+          type: string
+          format: uuid
+        current_version:
+          type: integer
+          format: int64
+          minimum: 1
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          minItems: 1
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanItem'
+        flights:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightState'
+        impacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Impact'
+    InboxMessage:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - kind
+      - text
+      - plan_version
+      - created_at
+      properties:
+        id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+          enum:
+          - status_update
+          - disruption
+          - plan_update
+        text:
+          type: string
+        plan_version:
+          type: integer
+          format: int64
+          minimum: 1
+        created_at:
+          type: string
+          format: date-time
+          pattern: Z$
+    InboxPage:
+      type: object
+      additionalProperties: false
+      required:
+      - messages
+      - next_cursor
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/InboxMessage'
+        next_cursor:
+          type: string
+          nullable: true
+    Leg:
+      type: object
+      additionalProperties: false
+      required:
+      - flight_key
+      - departure_at
+      - arrival_at
+      - origin_timezone
+      - destination_timezone
+      - baggage_kg
+      - available_seats
+      - mct_minutes
+      properties:
+        flight_key:
+          $ref: '#/components/schemas/FlightKey'
+        departure_at:
+          type: string
+          format: date-time
+          pattern: Z$
+        arrival_at:
+          type: string
+          format: date-time
+          pattern: Z$
+        origin_timezone:
+          type: string
+        destination_timezone:
+          type: string
+        baggage_kg:
+          type: integer
+          format: int64
+          minimum: 0
+        available_seats:
+          type: integer
+          format: int64
+          minimum: 1
+        mct_minutes:
+          type: integer
+          format: int64
+          nullable: true
+          minimum: 0
+      description: mct_minutes относится к пересадке перед этим участком, у первого null
+    FlightOffer:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - replacement_item_id
+      - checked_at
+      - expires_at
+      - price_minor
+      - currency
+      - eligibility_reasons
+      - required_actions
+      - kind
+      - legs
+      properties:
+        id: &id001
+          type: string
+          format: uuid
+        replacement_item_id: &id002
+          type: string
+          format: uuid
+          nullable: true
+        checked_at: &id003
+          type: string
+          format: date-time
+          pattern: Z$
+        expires_at: &id004
+          type: string
+          format: date-time
+          pattern: Z$
+        price_minor: &id005
+          type: integer
+          format: int64
+          minimum: 0
+          description: Полная цена для всей группы в минимальных единицах валюты
+        currency: &id006
+          type: string
+          pattern: ^[A-Z]{3}$
+        eligibility_reasons: &id007
+          type: array
+          items:
+            type: string
+          minItems: 1
+        required_actions: &id008
+          type: array
+          items:
+            type: string
+        kind:
+          type: string
+          enum:
+          - flight
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leg'
+          minItems: 1
+    ActivityOffer:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - replacement_item_id
+      - checked_at
+      - expires_at
+      - price_minor
+      - currency
+      - eligibility_reasons
+      - required_actions
+      - kind
+      - activity
+      properties:
+        id: *id001
+        replacement_item_id: *id002
+        checked_at: *id003
+        expires_at: *id004
+        price_minor: *id005
+        currency: *id006
+        eligibility_reasons: *id007
+        required_actions: *id008
+        kind:
+          type: string
+          enum:
+          - activity
+        activity:
+          type: object
+          additionalProperties: false
+          required:
+          - title
+          - location
+          - starts_at
+          - ends_at
+          - timezone
+          - capacity
+          properties:
+            title:
+              type: string
+            location:
+              type: string
+            starts_at:
+              type: string
+              format: date-time
+              pattern: Z$
+            ends_at:
+              type: string
+              format: date-time
+              pattern: Z$
+            timezone:
+              type: string
+            capacity:
+              type: integer
+              format: int64
+              minimum: 1
+    Offer:
+      oneOf:
+      - $ref: '#/components/schemas/FlightOffer'
+      - $ref: '#/components/schemas/ActivityOffer'
+      discriminator:
+        propertyName: kind
+        mapping:
+          flight: '#/components/schemas/FlightOffer'
+          activity: '#/components/schemas/ActivityOffer'
+    Alternatives:
+      type: object
+      additionalProperties: false
+      required:
+      - state
+      - offers
+      - checked_at
+      - explanation
+      properties:
+        state:
+          type: string
+          enum:
+          - searching
+          - available
+          - none_eligible
+          - temporarily_unavailable
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        checked_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+        explanation:
+          type: string
+      description: available требует непустой offers; остальные состояния возвращают пустой список
+    SelectionRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - offer_id
+      - expected_plan_version
+      properties:
+        offer_id:
+          type: string
+          format: uuid
+        expected_plan_version:
+          type: integer
+          format: int64
+          minimum: 1
+    SelectionResult:
+      type: object
+      additionalProperties: false
+      required:
+      - trip_id
+      - plan_version
+      - selected_offer_id
+      - required_actions
+      properties:
+        trip_id:
+          type: string
+          format: uuid
+        plan_version:
+          type: integer
+          format: int64
+          minimum: 2
+        selected_offer_id:
+          type: string
+          format: uuid
+        required_actions:
+          type: array
+          items:
+            type: string
+      description: Версия выбранного плана; required_actions показывает незавершённое бронирование
+  responses:
+    '401':
+      description: Недействительный или отсутствующий токен
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '403':
+      description: Недостаточно прав или provider_id не соответствует сервисному токену
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '404':
+      description: Объект отсутствует или недоступен текущему пользователю
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '409':
+      description: Конфликт содержимого, версии, актуальности или условий предложения
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '422':
+      description: Нарушение контракта или бизнес-валидации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    '503':
+      description: Сохранение или повторная проверка временно недоступны
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

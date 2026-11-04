@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="26.0.16" type="device">
+  <diagram id="04-data-model" name="04-data-model">
+    <mxGraphModel dx="1900" dy="1620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cell-title" value="Логическая модель данных" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="15" width="1840" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-subtitle" value="UML class diagram | PK: первичный ключ | FK: внешний ключ | UQ: уникальность | Основные связи и кратности" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="1840" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-trip" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="350" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-trip-name" value="Trip" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="43" y="173" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-trip-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="212" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-trip-fields" value="id: UUID {PK}&#10;owner_id: UUID&#10;current_version: int&#10;currency: char(3)&#10;title: text" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="45" y="219" width="340" height="206" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-item" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="170" width="360" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-item-name" value="PlanItem" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="513" y="173" width="354" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-item-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="212" width="360" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-item-fields" value="id: UUID {PK}&#10;trip_id: UUID {FK}&#10;flight_id: UUID? {FK}&#10;predecessor_id: UUID? {FK}&#10;kind, UTC-окна, IANA-зона&#10;MCT, запас, время дороги&#10;booking_ref, booking_status" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="515" y="219" width="350" height="236" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-flight" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="170" width="350" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-flight-name" value="Flight" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="993" y="173" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-flight-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="212" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-flight-fields" value="id: UUID {PK}&#10;полный ключ {UQ}&#10;расписание, UTC, IANA&#10;status, estimates&#10;provider, stream, revision&#10;state_version&#10;observed_at, verified_at" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="995" y="219" width="340" height="236" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-event" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="170" width="380" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-event-name" value="FlightStatusEvent" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1473" y="173" width="374" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-event-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="212" width="380" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-event-fields" value="id: UUID {PK}&#10;flight_id: UUID? {FK}&#10;provider_id, event_id {UQ}&#10;полный ключ, stream, revision&#10;observed_at, received_at&#10;payload, hash, outcome" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="219" width="370" height="236" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-member" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="650" width="350" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-member-name" value="TripMember" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="43" y="653" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-member-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="692" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-member-fields" value="trip_id, user_id {PK}&#10;can_confirm&#10;baggage_kg&#10;route_entitlements&#10;interests" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="45" y="699" width="340" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-impact" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="650" width="360" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-impact-name" value="Impact" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="513" y="653" width="354" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-impact-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="692" width="360" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-impact-fields" value="id: UUID {PK}&#10;trip_id, item_id {FK}&#10;source_event_id {FK}&#10;source_state_version&#10;plan_version {FK}&#10;reason, state, explanation" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="515" y="699" width="350" height="226" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offer" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="650" width="350" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offer-name" value="Offer" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="993" y="653" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offer-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="692" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offer-fields" value="id: UUID {PK}&#10;trip_id, impact_id {FK}&#10;replacement_item_id {FK}&#10;условия, plan_patch, basis&#10;версии плана и рейсов&#10;checked_at, expires_at" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="995" y="699" width="340" height="226" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-version" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="650" width="380" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-version-name" value="PlanVersion" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1473" y="653" width="374" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-version-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="692" width="380" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-version-fields" value="trip_id, version {PK}&#10;snapshot: jsonb&#10;author_id: UUID&#10;reason: text&#10;created_at: timestamptz" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="699" width="370" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-inbox" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1150" width="350" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-inbox-name" value="InboxMessage" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="43" y="1153" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-inbox-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1192" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-inbox-fields" value="id: UUID {PK}&#10;trip_id, user_id {FK}&#10;kind, text, plan_version&#10;semantic_key {UQ scope}&#10;created_at: timestamptz" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="45" y="1199" width="340" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-outbox" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="1150" width="360" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-outbox-name" value="OutboxTask" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="513" y="1153" width="354" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-outbox-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="510" y="1192" width="360" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-outbox-fields" value="id: UUID {PK}&#10;kind, object_ref&#10;dedup_key {UQ}&#10;next_attempt_at, attempts&#10;lease, state" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="515" y="1199" width="350" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-command" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="1150" width="350" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-command-name" value="SelectionCommand" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="993" y="1153" width="344" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-command-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
+          <mxGeometry x="990" y="1192" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-command-fields" value="trip_id, actor_id, key {PK}&#10;offer_id {FK}&#10;request_hash&#10;result, plan_version&#10;created_at: timestamptz" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="995" y="1199" width="340" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-1" value="1 → 0..*" edge="1" parent="1" source="cell-trip" target="cell-item" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;exitX=1;exitY=0.5;entryX=0;entryY=0.45;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-2" value="1 → 1..*" edge="1" parent="1" source="cell-trip" target="cell-member" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-3" value="0..1 ← 0..*" edge="1" parent="1" source="cell-flight" target="cell-item" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;exitX=0;exitY=0.5;entryX=1;entryY=0.45;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-4" value="0..1 ← 0..*" edge="1" parent="1" source="cell-flight" target="cell-event" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-5" value="1 → 0..*" edge="1" parent="1" source="cell-item" target="cell-impact" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-6" value="1 → 0..*" edge="1" parent="1" source="cell-impact" target="cell-offer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-7" value="1 → 1..*" edge="1" parent="1" source="cell-trip" target="cell-version" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;exitX=0.5;exitY=0;entryX=0.5;entryY=0;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="125" />
+              <mxPoint x="1880" y="125" />
+              <mxPoint x="1880" y="590" />
+              <mxPoint x="1660" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell-edge-8" value="1 event → 0..* impacts" edge="1" parent="1" source="cell-event" target="cell-impact" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;exitX=0.5;exitY=1;entryX=0.7;entryY=0;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1660" y="540" />
+              <mxPoint x="760" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell-edge-9" value="1 → 0..*" edge="1" parent="1" source="cell-member" target="cell-inbox" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-10" value="1 → 0..* доставок" edge="1" parent="1" source="cell-inbox" target="cell-outbox" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-11" value="1 → 0..* команд" edge="1" parent="1" source="cell-offer" target="cell-command" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=15;endArrow=none;startArrow=none;strokeColor=#566573;" flow_kind="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-constraints" value="Правила&#10;&#10;Одна поездка: один общий план&#10;FK не смешивают разные поездки&#10;PlanVersion неизменяема&#10;Offer не является бронью&#10;Event.flight_id может быть null&#10;Паспорта не хранятся" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="1150" width="380" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-note" value="Flight может относиться к нескольким поездкам | Все участники поездки следуют общему плану&#10;Trip.current_version указывает на PlanVersion | Семантические UQ и составные FK описаны в docs/data-model.md&#10;У каждого PlanItem не более одного непосредственного предшественника в той же поездке; циклы запрещены" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1470" width="1800" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
