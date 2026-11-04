@@ -4,7 +4,7 @@
 
 Alfred отслеживает рейсы участников поездки, сообщает о задержках и отменах, предлагает допустимые перелёты или активности и сохраняет согласованные изменения общего плана
 
-Результат работы: спецификация системы, схемы UML/BPMN и контракт OpenAPI. Документы описывают проектное решение; сервер и реальные интеграции не реализованы
+Результат работы: спецификация системы, схемы UML/BPMN и контракт OpenAPI. Документы описывают проектное решение
 
 ## Решение
 
@@ -30,7 +30,7 @@ Alfred отслеживает рейсы участников поездки, с
 
 [OpenAPI](api/openapi.yaml) можно открыть в Swagger Editor локально или в его веб-версии
 
-Редактируемые схемы и изображения: [архитектура](docs/diagrams/01-architecture.drawio), [BPMN обработки статуса](docs/diagrams/02-status-process.drawio), [UML подтверждения](docs/diagrams/03-selection-sequence.drawio), [UML данных](docs/diagrams/04-data-model.drawio)
+Редактируемые схемы и изображения: [окружение Alfred](docs/diagrams/01-architecture.drawio), [компоненты Alfred](docs/diagrams/05-alfred-components.drawio), [BPMN обработки статуса](docs/diagrams/02-status-process.drawio), [UML подтверждения](docs/diagrams/03-selection-sequence.drawio), [UML данных](docs/diagrams/04-data-model.drawio)
 
 ## Граница системы
 
@@ -46,5 +46,3 @@ Alfred сохраняет выбранный план, но не выпуска�
 | PostgreSQL | События, план, версии, уведомления и очередь фоновых задач |
 | REST/JSON, OpenAPI 3.0 | Контракты пользовательского API и интеграций |
 | UML, BPMN 2.0, draw.io | Архитектура, взаимодействия, данные и процесс |
-
-REST, SQL и UML/BPMN указаны в [требованиях Т-Банка к системным аналитикам](https://www.tbank.ru/career/it/vacancy/kirov/sistemnyj-analitik-union/ca55f0ed-d75c-437f-bd36-d0f34ac4cb88/), Java/Spring Boot и PostgreSQL встречаются в [стеке команд разработки](https://www.tbank.ru/career/back-office/vacancy/novosibirsk/java-developer/ba1d444f-9f54-4b97-a2b0-b65f30867d05/). Выбор для Alfred сделан под задачи кейса и не описывает внутреннюю архитектуру банка

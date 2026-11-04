@@ -69,6 +69,8 @@ paths:
           $ref: '#/components/responses/404'
         '422':
           $ref: '#/components/responses/422'
+        '503':
+          $ref: '#/components/responses/503'
   /trips/{trip_id}/inbox:
     parameters:
     - name: trip_id
@@ -80,7 +82,8 @@ paths:
     get:
       operationId: getInbox
       summary: Получить сообщения текущего участника
-      description: Сортировка created_at,id по возрастанию; cursor непрозрачный и привязан к trip/user
+      description: Сортировка по sequence_no внутри поездки; cursor непрозрачен, привязан к trip/user и не пропускает
+        поздний commit
       parameters:
       - name: cursor
         in: query
@@ -107,6 +110,8 @@ paths:
           $ref: '#/components/responses/404'
         '422':
           $ref: '#/components/responses/422'
+        '503':
+          $ref: '#/components/responses/503'
   /trips/{trip_id}/impacts/{impact_id}/alternatives:
     parameters:
     - name: trip_id
@@ -137,6 +142,8 @@ paths:
           $ref: '#/components/responses/404'
         '422':
           $ref: '#/components/responses/422'
+        '503':
+          $ref: '#/components/responses/503'
   /trips/{trip_id}/selections:
     parameters:
     - name: trip_id
@@ -148,7 +155,8 @@ paths:
     post:
       operationId: confirmSelection
       summary: Сохранить выбранное изменение общего плана
-      description: Проверить can_confirm, revalidation, версии плана и исходных рейсов; бронирование отдельно
+      description: Проверить активное членство и owner_id либо can_confirm, revalidation, версии плана и исходных
+        рейсов; бронирование отдельно
       parameters:
       - name: Idempotency-Key
         in: header
@@ -360,6 +368,7 @@ components:
           format: uuid
         can_confirm:
           type: boolean
+          description: Делегированное право; организатор определяется через Trip.owner_id
         baggage_kg:
           type: integer
           format: int64
@@ -561,6 +570,9 @@ components:
       - items
       - flights
       - impacts
+      - context_verified_at
+      - context_state
+      - tracking_enabled
       properties:
         id:
           type: string
@@ -582,6 +594,7 @@ components:
           items:
             $ref: '#/components/schemas/Member'
           minItems: 1
+          description: Только активные участники поездки
         items:
           type: array
           items:
@@ -594,6 +607,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Impact'
+        context_verified_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+          description: Последняя успешная проверка контекста поездки у TravelTech
+        context_state:
+          type: string
+          enum:
+          - confirmed
+          - pending
+          - unavailable
+          description: Актуальность обязательных ограничений, проверяемых при подтверждении
+        tracking_enabled:
+          type: boolean
     InboxMessage:
       type: object
       additionalProperties: false
@@ -897,7 +925,7 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
     '503':
-      description: Сохранение или повторная проверка временно недоступны
+      description: Хранилище или повторная проверка временно недоступны
       content:
         application/json:
           schema:

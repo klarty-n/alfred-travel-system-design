@@ -20,7 +20,7 @@
         <mxCell id="cell-trip-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
           <mxGeometry x="40" y="212" width="350" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-trip-fields" value="id: UUID {PK}&#10;owner_id: UUID&#10;current_version: int&#10;currency: char(3)&#10;title: text" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="cell-trip-fields" value="id: UUID {PK}&#10;owner_id / current_version&#10;currency: char(3)&#10;title: text&#10;source_context_revision&#10;context_hash&#10;context_verified_at&#10;tracking_enabled&#10;last_inbox_sequence" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="45" y="219" width="340" height="206" as="geometry" />
         </mxCell>
         <mxCell id="cell-item" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
@@ -44,7 +44,7 @@
         <mxCell id="cell-flight-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
           <mxGeometry x="990" y="212" width="350" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-flight-fields" value="id: UUID {PK}&#10;полный ключ {UQ}&#10;расписание, UTC, IANA&#10;status, estimates&#10;provider, stream, revision&#10;state_version&#10;observed_at, verified_at" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="cell-flight-fields" value="id: UUID {PK}&#10;полный ключ {UQ}&#10;расписание, UTC, IANA&#10;status, estimates&#10;provider, stream, revision&#10;state_version, current_event_id&#10;observed_at, verified_at" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="995" y="219" width="340" height="236" as="geometry" />
         </mxCell>
         <mxCell id="cell-event" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
@@ -68,7 +68,7 @@
         <mxCell id="cell-member-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
           <mxGeometry x="40" y="692" width="350" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-member-fields" value="trip_id, user_id {PK}&#10;can_confirm&#10;baggage_kg&#10;route_entitlements&#10;interests" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="cell-member-fields" value="trip_id, user_id {PK}&#10;active, can_confirm&#10;baggage_kg&#10;route_entitlements&#10;interests" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="45" y="699" width="340" height="196" as="geometry" />
         </mxCell>
         <mxCell id="cell-impact" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
@@ -116,7 +116,7 @@
         <mxCell id="cell-inbox-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
           <mxGeometry x="40" y="1192" width="350" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-inbox-fields" value="id: UUID {PK}&#10;trip_id, user_id {FK}&#10;kind, text, plan_version&#10;semantic_key {UQ scope}&#10;created_at: timestamptz" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="cell-inbox-fields" value="id: UUID {PK}&#10;trip_id, user_id {FK}&#10;kind, text, plan_version&#10;semantic_key {UQ scope}&#10;sequence_no {UQ scope}&#10;created_at: timestamptz" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="45" y="1199" width="340" height="186" as="geometry" />
         </mxCell>
         <mxCell id="cell-outbox" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
@@ -128,7 +128,7 @@
         <mxCell id="cell-outbox-separator" value="" style="shape=line;strokeColor=#476a92;" vertex="1" parent="1">
           <mxGeometry x="510" y="1192" width="360" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-outbox-fields" value="id: UUID {PK}&#10;kind, object_ref&#10;dedup_key {UQ}&#10;next_attempt_at, attempts&#10;lease, state" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="cell-outbox-fields" value="id: UUID {PK}&#10;kind, object_ref&#10;dedup_key {UQ}&#10;next_attempt_at, attempts&#10;lease_token / lease_until&#10;state" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=17;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="515" y="1199" width="350" height="186" as="geometry" />
         </mxCell>
         <mxCell id="cell-command" value="" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=14;fontFamily=Arial;fontSize=17;fillColor=#ffffff;strokeColor=#476a92;" vertex="1" parent="1">
