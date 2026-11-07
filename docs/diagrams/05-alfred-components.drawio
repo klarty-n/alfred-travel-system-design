@@ -131,7 +131,7 @@
         <mxCell id="cell-worker-title" value="Фоновые задачи" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-worker">
           <mxGeometry x="7" y="4" width="298" height="36" as="geometry" />
         </mxCell>
-        <mxCell id="cell-worker-body" value="Очередь и повтор обработки&#10;Опрос, поиск, синхронизация, доставка" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-worker">
+        <mxCell id="cell-worker-body" value="Очередь и повтор обработки&#10;Группы по видам задач&#10;Раздельные лимиты и масштабирование" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-worker">
           <mxGeometry x="7" y="43" width="336" height="73" as="geometry" />
         </mxCell>
         <mxCell id="cell-worker-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-worker">

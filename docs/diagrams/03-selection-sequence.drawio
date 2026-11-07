@@ -86,7 +86,7 @@
         <mxCell id="cell-m5b" value="" style="opacity=0;fillOpacity=0;strokeOpacity=0;" vertex="1" parent="1">
           <mxGeometry x="925" y="480" width="1" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-5" value="Offers.revalidate: ID, fingerprint, критерии" edge="1" parent="1" source="cell-m5a" target="cell-m5b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;edgeStyle=none;endArrow=open;endFill=0;fontFamily=Arial;fontSize=14;verticalLabelPosition=top;verticalAlign=bottom;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence">
+        <mxCell id="cell-edge-5" value="Offers.revalidate: поставщик, offer ID, критерии и fingerprint" edge="1" parent="1" source="cell-m5a" target="cell-m5b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;edgeStyle=none;endArrow=open;endFill=0;fontFamily=Arial;fontSize=14;verticalLabelPosition=top;verticalAlign=bottom;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cell-m6a" value="" style="opacity=0;fillOpacity=0;strokeOpacity=0;" vertex="1" parent="1">
@@ -161,7 +161,7 @@
         <mxCell id="cell-m12b" value="" style="opacity=0;fillOpacity=0;strokeOpacity=0;" vertex="1" parent="1">
           <mxGeometry x="1620" y="1070" width="1" height="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-12" value="Повторить права, версии плана/рейсов/правил и expiry" edge="1" parent="1" source="cell-m12a" target="cell-m12b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;edgeStyle=none;endArrow=open;endFill=0;fontFamily=Arial;fontSize=14;verticalLabelPosition=top;verticalAlign=bottom;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence">
+        <mxCell id="cell-edge-12" value="Проверить права, версии, текущий поиск и сроки" edge="1" parent="1" source="cell-m12a" target="cell-m12b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;edgeStyle=none;endArrow=open;endFill=0;fontFamily=Arial;fontSize=14;verticalLabelPosition=top;verticalAlign=bottom;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cell-m13a" value="" style="opacity=0;fillOpacity=0;strokeOpacity=0;" vertex="1" parent="1">
