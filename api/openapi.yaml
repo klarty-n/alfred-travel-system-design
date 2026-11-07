@@ -82,8 +82,8 @@ paths:
     get:
       operationId: getInbox
       summary: Получить сообщения текущего участника
-      description: Сортировка по sequence_no внутри поездки; cursor непрозрачен, привязан к trip/user и не пропускает
-        поздний commit
+      description: Сортировка по sequence_no внутри поездки; cursor непрозрачен, привязан к trip/user и не
+        пропускает поздний commit
       parameters:
       - name: cursor
         in: query
@@ -144,6 +144,8 @@ paths:
           $ref: '#/components/responses/422'
         '503':
           $ref: '#/components/responses/503'
+      description: Чтение сохранённого фонового результата, включая неполноту поиска; новый запрос к поставщикам
+        при чтении не выполняется
   /trips/{trip_id}/selections:
     parameters:
     - name: trip_id
@@ -155,8 +157,8 @@ paths:
     post:
       operationId: confirmSelection
       summary: Сохранить выбранное изменение общего плана
-      description: Проверить активное членство и owner_id либо can_confirm, revalidation, версии плана и исходных
-        рейсов; бронирование отдельно
+      description: Активное членство и право подтверждения; Offers.revalidate и общие проверки предложения
+        и маршрута; версии плана/рейсов/правил; выбор плана без покупки
       parameters:
       - name: Idempotency-Key
         in: header
@@ -462,6 +464,8 @@ components:
       - latest_start_at
       - timezone
       - booking_status
+      - start_place
+      - end_place
       properties:
         id:
           type: string
@@ -507,7 +511,12 @@ components:
           - needs_booking
           - needs_change
           - not_required
-      description: kind=flight требует flight_id, прочие виды требуют null; интервалы проверяются сервером
+        start_place:
+          $ref: '#/components/schemas/Place'
+        end_place:
+          $ref: '#/components/schemas/Place'
+      description: Только текущий элемент is_current=true; kind=flight требует flight_id, прочие виды null.
+        Окна, места и цепочка проверяются сервером
     Impact:
       type: object
       additionalProperties: false
@@ -599,6 +608,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlanItem'
+          description: Только PlanItem с is_current=true; прежний состав сохраняется в PlanVersion
         flights:
           type: array
           items:
@@ -677,6 +687,7 @@ components:
       - baggage_kg
       - available_seats
       - mct_minutes
+      - baggage_by_member
       properties:
         flight_key:
           $ref: '#/components/schemas/FlightKey'
@@ -696,6 +707,8 @@ components:
           type: integer
           format: int64
           minimum: 0
+          description: Минимум подтверждённых норм baggage_by_member; сводное значение, индивидуальная проверка
+            использует массив
         available_seats:
           type: integer
           format: int64
@@ -705,6 +718,13 @@ components:
           format: int64
           nullable: true
           minimum: 0
+        baggage_by_member:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/BaggageAllowance'
+          description: Каждый активный участник поездки ровно один раз; полнота и принадлежность проверяются
+            сервером
       description: mct_minutes относится к пересадке перед этим участком, у первого null
     FlightOffer:
       type: object
@@ -720,6 +740,8 @@ components:
       - required_actions
       - kind
       - legs
+      - evaluated_plan_version
+      - ranking_reasons
       properties:
         id: &id001
           type: string
@@ -740,7 +762,8 @@ components:
           type: integer
           format: int64
           minimum: 0
-          description: Полная цена для всей группы в минимальных единицах валюты
+          description: Полная цена нового предложения для всей группы, включая сборы и выбранные подтверждённые
+            опции
         currency: &id006
           type: string
           pattern: ^[A-Z]{3}$
@@ -762,6 +785,17 @@ components:
           items:
             $ref: '#/components/schemas/Leg'
           minItems: 1
+        evaluated_plan_version:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Версия плана, по которой подготовлен вариант
+        ranking_reasons:
+          type: array
+          minItems: 1
+          items:
+            type: string
+          description: Объяснение позиции, сформированное общей политикой восстановления
     ActivityOffer:
       type: object
       additionalProperties: false
@@ -776,6 +810,8 @@ components:
       - required_actions
       - kind
       - activity
+      - evaluated_plan_version
+      - ranking_reasons
       properties:
         id: *id001
         replacement_item_id: *id002
@@ -818,6 +854,17 @@ components:
               type: integer
               format: int64
               minimum: 1
+        evaluated_plan_version:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Версия плана, по которой подготовлен вариант
+        ranking_reasons:
+          type: array
+          minItems: 1
+          items:
+            type: string
+          description: Объяснение позиции, сформированное общей политикой восстановления
     Offer:
       oneOf:
       - $ref: '#/components/schemas/FlightOffer'
@@ -835,6 +882,7 @@ components:
       - offers
       - checked_at
       - explanation
+      - search_complete
       properties:
         state:
           type: string
@@ -854,7 +902,43 @@ components:
           nullable: true
         explanation:
           type: string
-      description: available требует непустой offers; остальные состояния возвращают пустой список
+        search_complete:
+          type: boolean
+          description: Все страницы выбранных источников обработаны без незавершённых запросов
+      description: 'available: непустой offers, поиск может быть неполным; none_eligible требует search_complete=true;
+        searching/temporarily_unavailable возвращают пустой offers; состояние и полнота берутся из текущего
+        SearchRun, предложения из связанных Offer'
+      oneOf:
+      - properties:
+          state:
+            enum:
+            - available
+          offers:
+            minItems: 1
+          checked_at: &id009
+            type: string
+            format: date-time
+            pattern: Z$
+      - properties:
+          state:
+            enum:
+            - none_eligible
+          offers:
+            maxItems: 0
+          search_complete:
+            enum:
+            - true
+          checked_at: *id009
+      - properties:
+          state:
+            enum:
+            - searching
+            - temporarily_unavailable
+          offers:
+            maxItems: 0
+          search_complete:
+            enum:
+            - false
     SelectionRequest:
       type: object
       additionalProperties: false
@@ -893,6 +977,55 @@ components:
           items:
             type: string
       description: Версия выбранного плана; required_actions показывает незавершённое бронирование
+    Place:
+      type: object
+      nullable: true
+      additionalProperties: false
+      required:
+      - kind
+      - code
+      - country_code
+      - timezone
+      properties:
+        kind:
+          type: string
+          enum:
+          - airport
+          - place
+        code:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Для airport код IATA, для place ID места TravelTech
+        country_code:
+          type: string
+          pattern: ^[A-Z]{2}$
+        timezone:
+          type: string
+          minLength: 1
+          maxLength: 64
+          example: America/Los_Angeles
+        terminal:
+          type: string
+          nullable: true
+          maxLength: 64
+      description: null означает неизвестное место; airport требует код IATA из трёх букв, IANA-зона проверяется
+        сервером
+    BaggageAllowance:
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - baggage_kg
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        baggage_kg:
+          type: integer
+          format: int64
+          minimum: 0
+      description: Подтверждённая норма участника на этом участке, включая выбранные платные опции
   responses:
     '401':
       description: Недействительный или отсутствующий токен
