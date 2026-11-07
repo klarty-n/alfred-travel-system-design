@@ -44,7 +44,7 @@
         <mxCell id="cell-flight-title" value="Flight" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=8;align=center;fontSize=21;fontStyle=1;strokeColor=#718497;fillColor=#f1f4f7;" vertex="1" parent="cell-flight">
           <mxGeometry x="0" y="0" width="440" height="43" as="geometry" />
         </mxCell>
-        <mxCell id="cell-flight-fields" value="id: UUID {PK}&#10;полный ключ рейса {UQ}&#10;расписание UTC / IANA-зоны&#10;status / estimates?&#10;authoritative_provider_id&#10;stream_id? / revision?&#10;state_version / current_event_id? {FK}&#10;last_observed_at? / last_verified_at?&#10;verification_state" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=8;verticalAlign=top;fontSize=16;" vertex="1" parent="cell-flight">
+        <mxCell id="cell-flight-fields" value="id: UUID {PK}&#10;полный ключ рейса {UQ}&#10;расписание UTC / IANA-зоны&#10;status / estimates?&#10;boarding_cutoff_at?: timestamptz&#10;authoritative_provider_id&#10;stream_id? / revision?&#10;state_version / current_event_id? {FK}&#10;last_observed_at? / last_verified_at?&#10;verification_state" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=8;verticalAlign=top;fontSize=16;" vertex="1" parent="cell-flight">
           <mxGeometry x="5" y="49" width="430" height="300" as="geometry" />
         </mxCell>
         <mxCell id="cell-item" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#718497;" vertex="1" parent="1" entity="PlanItem">

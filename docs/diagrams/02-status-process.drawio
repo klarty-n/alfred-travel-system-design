@@ -417,7 +417,7 @@
         <mxCell id="cell-edge-41-caption" value="Новизна не доказана" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;align=center;backgroundOutline=1;labelBackgroundColor=#ffffff;" vertex="1" parent="1" bpmn_type="decoration">
           <mxGeometry x="1800" y="1680" width="350" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="cell-worker-safety" value="Любая ошибка БД / потеря worker: задача не подтверждается; повтор после lease. Запись результата допускается только текущему lease_token&#10;Новая ревизия с прежними статусом и временами сохраняется без изменения state_version. Подтверждённое исправление отмены считается новым состоянием&#10;Задача каждой поездки обрабатывается независимо: её отказ не теряет задачи других поездок" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="cell-worker" bpmn_type="decoration">
+        <mxCell id="cell-worker-safety" value="Любая ошибка БД / потеря worker: задача не подтверждается; повтор после lease. Запись результата допускается только текущему lease_token&#10;Изменение статуса, ожидаемых времён или boarding_cutoff_at увеличивает state_version. Подтверждённое исправление отмены считается новым состоянием&#10;Задача каждой поездки обрабатывается независимо: её отказ не теряет задачи других поездок" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="cell-worker" bpmn_type="decoration">
           <mxGeometry x="85" y="735" width="1200" height="240" as="geometry" />
         </mxCell>
         <mxCell id="cell-legend" value="Круг с конвертом: сообщение | Круг с документом: запуск при доступной задаче | X: одна ветка | Толстый круг: завершение экземпляра&#10;Сплошные стрелки: последовательность внутри Alfred | Пунктир: сообщения между участниками | «+» у задачи: свёрнутый подпроцесс повторных запросов" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="1" bpmn_type="decoration">
@@ -427,7 +427,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="impacts" name="2. Последствия">
-    <mxGraphModel dx="2420" dy="1450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2420" pageHeight="1450" math="0" shadow="0">
+    <mxGraphModel dx="2420" dy="1570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2420" pageHeight="1570" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -438,7 +438,7 @@
           <mxGeometry x="25" y="65" width="2370" height="40" as="geometry" />
         </mxCell>
         <mxCell id="cell-alfred" value="Alfred: process_impact" style="swimlane;horizontal=1;startSize=40;html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=19;fontStyle=1;align=left;spacingLeft=15;fillColor=#f1f4f7;swimlaneFillColor=#ffffff;strokeColor=#9aa8b5;" vertex="1" parent="1" bpmn_type="pool">
-          <mxGeometry x="25" y="125" width="2370" height="1160" as="geometry" />
+          <mxGeometry x="25" y="125" width="2370" height="1300" as="geometry" />
         </mxCell>
         <mxCell id="cell-ready" value="" style="ellipse;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#53677b;fontFamily=Arial;fontSize=16;" vertex="1" parent="cell-alfred" bpmn_type="conditional_start">
           <mxGeometry x="60" y="155" width="42" height="42" as="geometry" />
@@ -518,11 +518,11 @@
         <mxCell id="cell-outcome-label" value="Результат оценки" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;align=center;" vertex="1" parent="cell-alfred" bpmn_type="decoration">
           <mxGeometry x="2085" y="70" width="254" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="cell-safe" value="Закрыть исчезнувшие последствия&#10;resolved / superseded; остановить поиск&#10;Сохранить status_update + доставку&#10;Без нового поиска" style="rounded=1;arcSize=12;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=9;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="task">
-          <mxGeometry x="1755" y="605" width="410" height="130" as="geometry" />
+        <mxCell id="cell-safe" value="Закрыть неактуальные последствия&#10;Сохранить status_update и задачу доставки&#10;Без нового поиска" style="rounded=1;arcSize=12;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=9;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="task">
+          <mxGeometry x="1755" y="875" width="410" height="130" as="geometry" />
         </mxCell>
         <mxCell id="cell-safe-end" value="" style="ellipse;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#53677b;fontFamily=Arial;fontSize=16;strokeWidth=3;" vertex="1" parent="cell-alfred" bpmn_type="end_event">
-          <mxGeometry x="2235" y="649" width="42" height="42" as="geometry" />
+          <mxGeometry x="2235" y="919" width="42" height="42" as="geometry" />
         </mxCell>
         <mxCell id="cell-edge-4" value="" edge="1" parent="1" source="cell-safe" target="cell-safe-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="">
           <mxGeometry relative="1" as="geometry" />
@@ -590,39 +590,70 @@
         <mxCell id="cell-edge-16" value="" edge="1" parent="1" source="cell-evaluate" target="cell-outcome" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-17" value="Нарушений нет" edge="1" parent="1" source="cell-outcome" target="cell-safe" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0.5;entryY=0;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="Нарушений нет">
+        <mxCell id="cell-edge-17" value="Нарушений нет" edge="1" parent="1" source="cell-outcome" target="cell-window" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0.5;entryY=0;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="Нарушений нет">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="2320" y="302" />
-              <mxPoint x="2320" y="665" />
-              <mxPoint x="1985" y="665" />
+              <mxPoint x="2320" y="680" />
+              <mxPoint x="1985" y="680" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="cell-edge-18" value="Не хватает обязательных данных" edge="1" parent="1" source="cell-outcome" target="cell-uncertain" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="Не хватает обязательных данных">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2237" y="640" />
-              <mxPoint x="1350" y="640" />
+              <mxPoint x="2237" y="642" />
+              <mxPoint x="1350" y="642" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="cell-edge-19" value="Нарушение подтверждено" edge="1" parent="1" source="cell-outcome" target="cell-disrupted" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=14;strokeWidth=1.2;exitX=0;exitY=0.5;entryX=0.5;entryY=0;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="Нарушение подтверждено">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2190" y="605" />
-              <mxPoint x="650" y="605" />
+              <mxPoint x="2190" y="610" />
+              <mxPoint x="650" y="610" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-atomic" value="Во всех трёх исходах: одна транзакция для последствий, inbox и OutboxTask; ключи дедупликации предотвращают повтор эффекта&#10;При отмене нет выдуманного прибытия. Прибытие позже окна отеля не означает автоматическую отмену брони&#10;Смена контекста / плана инициирует пересчёт даже без нового события. Потерявшее связь с текущим планом последствие становится superseded" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="decoration">
-          <mxGeometry x="95" y="840" width="2160" height="120" as="geometry" />
+        <mxCell id="cell-atomic" value="Одна транзакция для последствий, inbox и OutboxTask; ключи дедупликации предотвращают повтор эффекта&#10;При отмене нет выдуманного прибытия. Прибытие позже окна отеля не означает автоматическую отмену брони&#10;Смена контекста / плана инициирует пересчёт даже без нового события. Потерявшее связь с текущим планом последствие становится superseded" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="decoration">
+          <mxGeometry x="95" y="1035" width="2160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="cell-independent" value="Поиск и доставка получают отдельные надёжные задачи и выполняются независимо: уведомление сохраняется до завершения подбора&#10;Новая поездка, новый состав группы или новая версия плана используют известные статусы. Нехватка данных по одному условию не отменяет уже доказанное нарушение по другому" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="decoration">
-          <mxGeometry x="95" y="995" width="2160" height="95" as="geometry" />
+          <mxGeometry x="95" y="1160" width="2160" height="95" as="geometry" />
         </mxCell>
-        <mxCell id="cell-legend" value="Результат оценки выбирается по приоритету: доказанное нарушение; иначе неопределённость; иначе нарушений нет&#10;Крайние значения MCT и окон проверяются по правилам требований. Действия по броням не означают фактическое бронирование" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="1" bpmn_type="decoration">
-          <mxGeometry x="25" y="1310" width="2370" height="90" as="geometry" />
+        <mxCell id="cell-legend" value="Приоритет оценки: доказанное нарушение, затем неопределённость, затем выполнимый маршрут&#10;Крайние значения MCT и окон проверяются по правилам требований. Действия по броням не означают фактическое бронирование" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#53677b;" vertex="1" parent="1" bpmn_type="decoration">
+          <mxGeometry x="25" y="1445" width="2370" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-window" value="При delayed проверить окно ожидания&#10;Готовность группы и зона аэропорта&#10;Подтверждённое время до посадки" style="rounded=1;arcSize=12;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=9;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="task">
+          <mxGeometry x="1755" y="605" width="410" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-window-gate" value="X" style="rhombus;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=23;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="exclusive_gateway">
+          <mxGeometry x="1933" y="761" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-window-label" value="Есть безопасное окно?" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;" vertex="1" parent="cell-alfred" bpmn_type="decoration">
+          <mxGeometry x="1999" y="761" width="290" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-wait-activity" value="Закрыть неактуальные последствия&#10;Сохранить status_update и доставку&#10;Impact waiting_activity + SearchRun&#10;Задача поиска активности (стр. 3)" style="rounded=1;arcSize=12;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=9;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-alfred" bpmn_type="task">
+          <mxGeometry x="1150" y="875" width="490" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-wait-end" value="" style="ellipse;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#53677b;strokeWidth=3;" vertex="1" parent="cell-alfred" bpmn_type="end_event">
+          <mxGeometry x="1690" y="919" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-window" value="" edge="1" parent="1" source="cell-window" target="cell-window-gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;labelBackgroundColor=#ffffff;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-window-no" value="Нет" edge="1" parent="1" source="cell-window-gate" target="cell-safe" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;labelBackgroundColor=#ffffff;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" flow_kind="sequence" condition="Нет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-window-yes" value="Да" edge="1" parent="1" source="cell-window-gate" target="cell-wait-activity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;labelBackgroundColor=#ffffff;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" flow_kind="sequence" condition="Да">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1420" y="913" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell-edge-wait-end" value="" edge="1" parent="1" source="cell-wait-activity" target="cell-wait-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;labelBackgroundColor=#ffffff;fontFamily=Arial;fontSize=14;strokeWidth=1.2;endArrow=block;endFill=1;strokeColor=#333333;" flow_kind="sequence" condition="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

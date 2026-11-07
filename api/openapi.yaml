@@ -148,7 +148,9 @@ paths:
         Читает текущий SearchRun в одном снимке БД. Проверяет открытое последствие, версии плана,
         исходных рейсов и правил, срок каждого предложения. Пока актуальный результат готовится,
         возвращает searching с пустой выдачей и search_complete=false. Закрытое последствие
-        или архивный элемент дают 404. Обращений к поставщикам при чтении нет
+        или архивный элемент дают 404. Для waiting_activity истёкшее или неподтверждённое окно
+        даёт temporarily_unavailable до закрытия последствия.
+        Обращений к поставщикам при чтении нет
   /trips/{trip_id}/selections:
     parameters:
     - name: trip_id
@@ -161,7 +163,8 @@ paths:
       operationId: confirmSelection
       summary: Сохранить выбранное изменение общего плана
       description: Активное членство и право подтверждения; Offers.revalidate и общие проверки предложения
-        и маршрута; повторная проверка версий и текущего поиска перед записью; выбор плана без покупки
+        и маршрута. Для waiting_activity проверяется актуальное окно посадки. Перед записью повторно
+        проверяются версии и текущий поиск. Выбор плана без покупки
       parameters:
       - name: Idempotency-Key
         in: header
@@ -306,7 +309,13 @@ components:
           pattern: Z$
           nullable: true
           example: '2026-11-13T00:40:00Z'
-      description: received_at назначает сервер; null stream/revision требует сверки с источником
+        boarding_cutoff_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+          description: Крайнее время явки к выходу, подтверждённое источником. Отсутствие или null означает неизвестное время
+      description: received_at назначает сервер. Null stream/revision требует сверки с источником
     EventReceipt:
       type: object
       additionalProperties: false
@@ -427,6 +436,12 @@ components:
           format: date-time
           pattern: Z$
           nullable: true
+        boarding_cutoff_at:
+          type: string
+          format: date-time
+          pattern: Z$
+          nullable: true
+          description: Крайнее время явки к выходу, подтверждённое источником. Отсутствие или null означает неизвестное время
         origin_timezone:
           type: string
           example: America/Los_Angeles
@@ -558,6 +573,8 @@ components:
           - connection_missed
           - window_missed
           - needs_information
+          - waiting_activity
+          description: waiting_activity обозначает возможность добавить активность во время ожидания
         state:
           type: string
           enum:

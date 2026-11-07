@@ -14,7 +14,7 @@
 | TripMember | PK `(trip_id, user_id)`, `active`, `can_confirm`, `baggage_kg`, `route_entitlements`, `interests` |
 | PlanVersion | PK `(trip_id, version)`, неизменяемый `snapshot`, `author_id?`, `reason`, `created_at` |
 | PlanItem | `id` PK, `trip_id` FK, `is_current`, `kind`, `title`, `flight_id?` FK, `predecessor_id?` FK, `starts_at?`, `ends_at?`, `latest_start_at?`, `timezone`, `start_place?`, `end_place?`, `mct_minutes?`, `buffer_minutes`, `travel_minutes?`, `booking_ref?`, `booking_status` |
-| Flight | `id` PK, полный ключ UQ, исходное UTC-расписание и IANA-зоны, `status`, ожидаемые времена?, `authoritative_provider_id`, `stream_id?`, `revision?`, `state_version`, `current_event_id?` FK, `last_observed_at?`, `last_verified_at?`, `verification_state` |
+| Flight | `id` PK, полный ключ UQ, исходное UTC-расписание и IANA-зоны, `status`, ожидаемые времена?, `boarding_cutoff_at?`, `authoritative_provider_id`, `stream_id?`, `revision?`, `state_version`, `current_event_id?` FK, `last_observed_at?`, `last_verified_at?`, `verification_state` |
 | FlightStatusEvent | `id` PK, `provider_id`, `event_id`, ключ рейса, `flight_id?` FK, поток/ревизия?, `observed_at`, серверное `received_at`, разрешённый `payload`, хеш, `outcome`, `result_state_version?` |
 | Impact | `id` PK, `trip_id`, `item_id`, `source_flight_id`, `source_event_id`, `source_state_version`, `plan_version`, `reason`, `state`, `current_search_id?`, `required_actions`, `explanation` |
 | SearchRun | `id` PK, `trip_id`, `impact_id`, `evaluated_plan_version`, `source_state_versions`, `rules_version`, `criteria`, `ranking_policy`, `state`, `search_complete`, `cursor?`, `supplier_states`, `rejection_reasons`, `checked_at?`, `created_at`, `finished_at?` |
@@ -47,6 +47,8 @@ GET поездки возвращает только PlanItem с `is_current=tru
 | criteria, cursor, supplier_states, rejection_reasons | Критерии и фиксированный earliest_start_at запуска; курсоры поставщиков и признак завершения/ошибки каждого. Неуспешный источник не помечается завершённым; причины исключения сохраняются как набор кодов без персональных данных |
 
 Неизвестное место хранится как null. Неизвестное место, MCT, терминал или время переезда не заменяются значением 0. Переезд должен быть подтверждён TravelTech для соответствующих точек; иначе needs_information. Для первого участка без пересадки mct_minutes=null означает «не применяется»
+
+`Impact.reason=waiting_activity` обозначает возможность во время задержки. item_id указывает на задержанный перелёт, required_actions пуст, state=open. SearchRun хранит границу посадки и зону ожидания в criteria, а Offer добавляет активность с replacement_item_id=null. Срок Offer также ограничен свежестью окна и последним моментом, когда группа ещё успеет к началу активности
 
 ## Поиск и фоновые задачи
 
@@ -131,7 +133,7 @@ operating_carrier + flight_number + departure_date
 | Бронирование элемента | booked, needs_booking, needs_change, not_required |
 | OutboxTask | ready, processing, done, failed |
 
-`verification_state` хранится в Flight. Неудачная сверка меняет её и сохраняет причину в событии/задаче, но не подменяет подтверждённый статус. Flight.revision хранит последнюю принятую надёжную ревизию назначенного источника и потока, включая сообщения с прежними статусом и временами. При сверке без надёжной ревизии тот же поток сохраняет известную границу. Новый поток получает свою границу только после подтверждения. state_version и current_event_id меняются при первом подтверждении состояния или изменении бизнес-данных. Поле result_state_version события фиксирует применённую версию
+`verification_state` хранится в Flight. Неудачная сверка меняет её и сохраняет причину в событии/задаче, но не подменяет подтверждённый статус. Flight.revision хранит последнюю принятую надёжную ревизию назначенного источника и потока, включая сообщения с прежними статусом, временами и boarding_cutoff_at. При сверке без надёжной ревизии тот же поток сохраняет известную границу. Новый поток получает свою границу только после подтверждения. state_version и current_event_id меняются при первом подтверждении состояния или изменении бизнес-данных, включая появление, сдвиг или потерю подтверждённого boarding_cutoff_at. Поле result_state_version события фиксирует применённую версию
 
 `context_state` вычисляется по проверке контекста и синхронизации. Impact.booking_action_required вычисляется по действиям уточнения/изменения брони. Offer API строится из conditions и объяснений; внутренние payload, snapshot и разрешения участников целиком пользователю не передаются
 
