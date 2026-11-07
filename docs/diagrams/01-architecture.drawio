@@ -1,131 +1,350 @@
 <?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net" version="26.0.16" type="device">
   <diagram id="01-architecture" name="01-architecture">
-    <mxGraphModel dx="2160" dy="1380" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2160" pageHeight="1380" math="0" shadow="0">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="cell-title" value="Alfred в составе TravelTech" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontSize=24;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="15" width="2100" height="35" as="geometry" />
+        <mxCell id="cell-title" value="Alfred в TravelTech" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=25;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="25" y="15" width="1850" height="38" as="geometry" />
         </mxCell>
-        <mxCell id="cell-subtitle" value="Уровень 1 | Границы ответственности, источники данных и интерфейсы | UML, логическое представление" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="30" y="50" width="2100" height="40" as="geometry" />
+        <mxCell id="cell-subtitle" value="Границы системы и общие компоненты подбора" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=14;fontColor=#65788a;" vertex="1" parent="1">
+          <mxGeometry x="25" y="60" width="1850" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="cell-traveltech" value="TravelTech" style="swimlane;horizontal=1;startSize=42;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;fillColor=#f0f4f8;swimlaneFillColor=#ffffff;strokeColor=#657d95;" vertex="1" parent="1">
-          <mxGeometry x="300" y="135" width="1450" height="1100" as="geometry" />
+        <mxCell id="cell-traveltech" value="TravelTech" style="swimlane;horizontal=1;startSize=38;html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=17;fontStyle=1;align=left;spacingLeft=14;fillColor=#f1f4f7;swimlaneFillColor=#ffffff;strokeColor=#9aa8b5;" vertex="1" parent="1">
+          <mxGeometry x="260" y="125" width="1260" height="960" as="geometry" />
         </mxCell>
-        <mxCell id="cell-client" value="«component» Клиент TravelTech&#10;Мобильное приложение / сайт&#10;План, inbox, альтернативы" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="60" y="90" width="350" height="120" as="geometry" />
+        <mxCell id="cell-client" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#ffffff;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="60" y="105" width="300" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="cell-identity" value="«component» Идентификация TravelTech&#10;Вход и выдача токенов&#10;Ключи проверки JWT" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="1020" y="90" width="360" height="120" as="geometry" />
+        <mxCell id="cell-client-title" value="Клиент TravelTech" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-client">
+          <mxGeometry x="7" y="4" width="248" height="36" as="geometry" />
         </mxCell>
-        <mxCell id="cell-alfred" value="«subsystem» Alfred" style="swimlane;horizontal=1;startSize=42;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;fillColor=#f0f4f8;swimlaneFillColor=#ffffff;strokeColor=#657d95;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="60" y="325" width="860" height="675" as="geometry" />
+        <mxCell id="cell-client-body" value="План поездки&#10;Поиск, уведомления, выбор" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-client">
+          <mxGeometry x="7" y="43" width="286" height="63" as="geometry" />
         </mxCell>
-        <mxCell id="cell-app" value="«application» Alfred&#10;Java / Spring Boot&#10;API и проверка доступа&#10;Статусы, последствия, альтернативы, версии&#10;Фоновые обработчики и диагностика" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-alfred">
-          <mxGeometry x="45" y="85" width="770" height="200" as="geometry" />
+        <mxCell id="cell-client-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-client">
+          <mxGeometry x="271" y="12" width="17" height="21" as="geometry" />
         </mxCell>
-        <mxCell id="cell-db" value="«database» PostgreSQL Alfred&#10;События и состояния рейсов, поездки и версии&#10;Последствия, предложения, inbox и OutboxTask" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#d5e8d4;" vertex="1" parent="cell-alfred">
-          <mxGeometry x="125" y="420" width="610" height="135" as="geometry" />
+        <mxCell id="cell-client-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-client">
+          <mxGeometry x="265" y="16" width="12" height="5" as="geometry" />
         </mxCell>
-        <mxCell id="cell-booking" value="«component» Поездки и бронирования&#10;Booking.tracked_trips / context&#10;Участники, ограничения, факты броней&#10;Исходный план при подключении" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="1020" y="325" width="360" height="160" as="geometry" />
+        <mxCell id="cell-client-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-client">
+          <mxGeometry x="265" y="25" width="12" height="5" as="geometry" />
         </mxCell>
-        <mxCell id="cell-status-adapter" value="«component» Адаптер статусов&#10;Webhook → единый контракт&#10;Опрос и сверка Status.current" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="1020" y="590" width="360" height="140" as="geometry" />
+        <mxCell id="cell-booking" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#ffffff;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="490" y="105" width="340" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="cell-offers" value="«component» Поиск и проверка&#10;Search.alternatives&#10;Offers.revalidate&#10;Адаптеры к поставщикам" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="cell-traveltech">
-          <mxGeometry x="1020" y="865" width="360" height="160" as="geometry" />
+        <mxCell id="cell-booking-title" value="Поездки и бронирования" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-booking">
+          <mxGeometry x="7" y="4" width="288" height="36" as="geometry" />
         </mxCell>
-        <mxCell id="cell-user" value="«actor»&#10;Участник / организатор" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="25" y="230" width="220" height="110" as="geometry" />
+        <mxCell id="cell-booking-body" value="Первоначальный поиск и бронирование&#10;Контекст, участники, ограничения" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-booking">
+          <mxGeometry x="7" y="43" width="326" height="63" as="geometry" />
         </mxCell>
-        <mxCell id="cell-operator" value="«actor» Оператор&#10;Ошибки, алерты, повтор&#10;Без изменения маршрута" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="25" y="570" width="230" height="135" as="geometry" />
+        <mxCell id="cell-booking-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-booking">
+          <mxGeometry x="311" y="12" width="17" height="21" as="geometry" />
         </mxCell>
-        <mxCell id="cell-delivery" value="«external system»&#10;Доставка push/email&#10;Inbox остаётся в Alfred" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="25" y="990" width="240" height="140" as="geometry" />
+        <mxCell id="cell-booking-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-booking">
+          <mxGeometry x="305" y="16" width="12" height="5" as="geometry" />
         </mxCell>
-        <mxCell id="cell-provider" value="«external system»&#10;Поставщик статусов&#10;Webhook и API" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="1840" y="725" width="280" height="140" as="geometry" />
+        <mxCell id="cell-booking-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-booking">
+          <mxGeometry x="305" y="25" width="12" height="5" as="geometry" />
         </mxCell>
-        <mxCell id="cell-suppliers" value="«external system»&#10;Рейсы, отели, активности&#10;Поиск и условия" style="rounded=0;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;spacing=12;strokeColor=#476a92;fillColor=#dae8fc;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="1840" y="1010" width="280" height="150" as="geometry" />
+        <mxCell id="cell-identity" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#ffffff;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="910" y="105" width="300" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-1" value="Работа с поездкой" edge="1" parent="1" source="cell-user" target="cell-client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-identity-title" value="Идентификация" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-identity">
+          <mxGeometry x="7" y="4" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-identity-body" value="Вход и выдача токенов&#10;Ключи проверки подписи JWT" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-identity">
+          <mxGeometry x="7" y="43" width="286" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-identity-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-identity">
+          <mxGeometry x="271" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-identity-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-identity">
+          <mxGeometry x="265" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-identity-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-identity">
+          <mxGeometry x="265" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-alfred" value="Alfred" style="swimlane;horizontal=1;startSize=38;html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=17;fontStyle=1;align=left;spacingLeft=14;fillColor=#f1f4f7;swimlaneFillColor=#ffffff;strokeColor=#9aa8b5;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="60" y="315" width="650" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#ffffff;" vertex="1" parent="cell-alfred">
+          <mxGeometry x="40" y="65" width="570" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app-title" value="Приложение Alfred" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-app">
+          <mxGeometry x="7" y="4" width="518" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app-body" value="Восстановление и версии плана&#10;API, фоновые задачи, уведомления" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-app">
+          <mxGeometry x="7" y="43" width="556" height="113" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-app">
+          <mxGeometry x="541" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-app">
+          <mxGeometry x="535" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-app-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-app">
+          <mxGeometry x="535" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db" value="" style="fillColor=none;strokeColor=none;" vertex="1" parent="cell-alfred">
+          <mxGeometry x="80" y="380" width="490" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-bottom" value="" style="ellipse;fillColor=#edf5f2;strokeColor=#5c8277;" vertex="1" parent="cell-db">
+          <mxGeometry x="0" y="103" width="490" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-body" value="" style="fillColor=#edf5f2;strokeColor=none;" vertex="1" parent="cell-db">
+          <mxGeometry x="0" y="11" width="490" height="103" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-left" value="" style="shape=line;direction=south;strokeColor=#5c8277;" vertex="1" parent="cell-db">
+          <mxGeometry x="0" y="11" width="1" height="103" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-right" value="" style="shape=line;direction=south;strokeColor=#5c8277;" vertex="1" parent="cell-db">
+          <mxGeometry x="489" y="11" width="1" height="103" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-top" value="" style="ellipse;fillColor=#edf5f2;strokeColor=#5c8277;" vertex="1" parent="cell-db">
+          <mxGeometry x="0" y="0" width="490" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-db-text" value="PostgreSQL Alfred&#10;План, события, последствия, SearchRun и Offer&#10;Inbox и очередь OutboxTask" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;align=center;fontSize=16;" vertex="1" parent="cell-db">
+          <mxGeometry x="15" y="26" width="460" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#f0f7f5;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="870" y="315" width="340" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers-title" value="Общий подбор" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-offers">
+          <mxGeometry x="7" y="4" width="288" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers-body" value="Search.candidates / Offers.revalidate&#10;Проверка предложений и маршрута&#10;Ранжирование по выбранной политике" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-offers">
+          <mxGeometry x="7" y="43" width="326" height="158" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-offers">
+          <mxGeometry x="311" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-offers">
+          <mxGeometry x="305" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-offers-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-offers">
+          <mxGeometry x="305" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#ffffff;" vertex="1" parent="cell-traveltech">
+          <mxGeometry x="870" y="650" width="340" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter-title" value="Адаптер статусов" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-adapter">
+          <mxGeometry x="7" y="4" width="288" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter-body" value="Приём webhook, нормализация&#10;Status.current: опрос и сверка" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-adapter">
+          <mxGeometry x="7" y="43" width="326" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-adapter">
+          <mxGeometry x="311" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-adapter">
+          <mxGeometry x="305" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-adapter-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-adapter">
+          <mxGeometry x="305" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#f5f6f7;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="460" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers-title" value="Поставщики предложений" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-suppliers">
+          <mxGeometry x="7" y="4" width="208" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers-body" value="Рейсы, отели, активности&#10;Доступность и условия" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-suppliers">
+          <mxGeometry x="7" y="43" width="246" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-suppliers">
+          <mxGeometry x="231" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-suppliers">
+          <mxGeometry x="225" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-suppliers-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-suppliers">
+          <mxGeometry x="225" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#f5f6f7;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="775" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider-title" value="Поставщик статусов" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-provider">
+          <mxGeometry x="7" y="4" width="208" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider-body" value="Webhook и Status API" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-provider">
+          <mxGeometry x="7" y="43" width="246" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-provider">
+          <mxGeometry x="231" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-provider">
+          <mxGeometry x="225" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-provider-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-provider">
+          <mxGeometry x="225" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;fillColor=#f5f6f7;" vertex="1" parent="1">
+          <mxGeometry x="20" y="820" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery-title" value="Доставка" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=17;fontStyle=1;" vertex="1" parent="cell-delivery">
+          <mxGeometry x="7" y="4" width="168" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery-body" value="Push / email" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=15;verticalAlign=top;" vertex="1" parent="cell-delivery">
+          <mxGeometry x="7" y="43" width="206" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery-symbol" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-delivery">
+          <mxGeometry x="191" y="12" width="17" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery-tab0" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-delivery">
+          <mxGeometry x="185" y="16" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-delivery-tab1" value="" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#64788b;fontFamily=Arial;fontSize=15;" vertex="1" parent="cell-delivery">
+          <mxGeometry x="185" y="25" width="12" height="5" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user" value="" style="fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="230" width="190" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-head" value="" style="ellipse;html=0;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-user">
+          <mxGeometry x="83.0" y="3" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-torso" value="" style="shape=line;direction=south;strokeColor=#53677b;" vertex="1" parent="cell-user">
+          <mxGeometry x="95.0" y="27" width="1" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-arms" value="" style="shape=line;strokeColor=#53677b;" vertex="1" parent="cell-user">
+          <mxGeometry x="69.0" y="39" width="52" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-hip" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-user">
+          <mxGeometry x="95.0" y="60" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-foot1" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-user">
+          <mxGeometry x="75.0" y="84" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-user-foot2" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-user">
+          <mxGeometry x="115.0" y="84" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-1" value="" edge="1" parent="1" source="cell-user-hip" target="cell-user-foot1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;edgeStyle=none;endArrow=none;startArrow=none;strokeColor=#566573;strokeColor=#64788b;" flow_kind="association" architecture_link="association">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-2" value="Вход / получение токена" edge="1" parent="1" source="cell-client" target="cell-identity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.4;entryX=0;entryY=0.4;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-2" value="" edge="1" parent="1" source="cell-user-hip" target="cell-user-foot2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;edgeStyle=none;endArrow=none;startArrow=none;strokeColor=#566573;strokeColor=#64788b;" flow_kind="association" architecture_link="association">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-3" value="HTTPS / REST + токен" edge="1" parent="1" source="cell-client" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0.5;exitY=1;entryX=0.17;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-user-caption" value="Участник / организатор" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;align=center;fontSize=16;" vertex="1" parent="cell-user">
+          <mxGeometry x="0" y="88" width="190" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator" value="" style="fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="530" width="190" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-head" value="" style="ellipse;html=0;fillColor=#ffffff;strokeColor=#53677b;" vertex="1" parent="cell-operator">
+          <mxGeometry x="83.0" y="3" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-torso" value="" style="shape=line;direction=south;strokeColor=#53677b;" vertex="1" parent="cell-operator">
+          <mxGeometry x="95.0" y="27" width="1" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-arms" value="" style="shape=line;strokeColor=#53677b;" vertex="1" parent="cell-operator">
+          <mxGeometry x="69.0" y="39" width="52" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-hip" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-operator">
+          <mxGeometry x="95.0" y="60" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-foot1" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-operator">
+          <mxGeometry x="75.0" y="84" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-foot2" value="" style="opacity=0;strokeOpacity=0;fillOpacity=0;" vertex="1" parent="cell-operator">
+          <mxGeometry x="115.0" y="84" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-3" value="" edge="1" parent="1" source="cell-operator-hip" target="cell-operator-foot1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;edgeStyle=none;endArrow=none;startArrow=none;strokeColor=#566573;strokeColor=#64788b;" flow_kind="association" architecture_link="association">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-4" value="JWT: доверенные ключи" edge="1" parent="1" source="cell-app" target="cell-identity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0.9;exitY=0;entryX=0.5;entryY=1;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-4" value="" edge="1" parent="1" source="cell-operator-hip" target="cell-operator-foot2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;edgeStyle=none;endArrow=none;startArrow=none;strokeColor=#566573;strokeColor=#64788b;" flow_kind="association" architecture_link="association">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-operator-caption" value="Оператор поддержки" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;align=center;fontSize=16;" vertex="1" parent="cell-operator">
+          <mxGeometry x="0" y="88" width="190" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-5" value="Работа с поездкой" edge="1" parent="1" source="cell-user" target="cell-client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-6" value="Поиск / брони" edge="1" parent="1" source="cell-client" target="cell-booking" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-7" value="Вход" edge="1" parent="1" source="cell-client" target="cell-identity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.5;exitY=0;entryX=0.5;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1098" y="400" />
-              <mxPoint x="1500" y="400" />
+              <mxPoint x="470" y="180" />
+              <mxPoint x="1320" y="180" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-edge-5" value="Служебный API" edge="1" parent="1" source="cell-operator" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-8" value="HTTPS / REST + токен" edge="1" parent="1" source="cell-client" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.2;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-6" value="Контекст поездки" edge="1" parent="1" source="cell-app" target="cell-booking" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.15;entryX=0;entryY=0.7;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cell-edge-7" value="Опрос / сверка" edge="1" parent="1" source="cell-app" target="cell-status-adapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.8;entryX=0;entryY=0.7;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-9" value="Проверка JWT" edge="1" parent="1" source="cell-app" target="cell-identity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.97;exitY=0;entryX=0.15;entryY=1;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1250" y="705" />
-              <mxPoint x="1250" y="825" />
+              <mxPoint x="1010" y="405" />
+              <mxPoint x="1215" y="405" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-edge-8" value="«event» статус&#10;POST events" edge="1" parent="1" source="cell-status-adapter" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0;exitY=0.25;entryX=1;entryY=0.675;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#b36a11;" flow_kind="dependency" architecture_link="event">
+        <mxCell id="cell-edge-10" value="Обычный подбор" edge="1" parent="1" source="cell-booking" target="cell-offers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.8;exitY=1;entryX=0.5;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1275" y="760" />
-              <mxPoint x="1275" y="680" />
+              <mxPoint x="1022" y="380" />
+              <mxPoint x="1300" y="380" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-edge-9" value="«event» webhook" edge="1" parent="1" source="cell-provider" target="cell-status-adapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0;exitY=0.25;entryX=1;entryY=0.25;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#b36a11;" flow_kind="dependency" architecture_link="event">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cell-edge-10" value="REST / Status API" edge="1" parent="1" source="cell-status-adapter" target="cell-provider" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.8;entryX=0;entryY=0.8;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cell-edge-11" value="Search / revalidation" edge="1" parent="1" source="cell-app" target="cell-offers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.95;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="cell-edge-11" value="Загрузка / синхронизация контекста" edge="1" parent="1" source="cell-app" target="cell-booking" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.7;exitY=0;entryX=0.25;entryY=1;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" x="-0.2">
             <Array as="points">
-              <mxPoint x="1240" y="920" />
-              <mxPoint x="1240" y="1080" />
+              <mxPoint x="759" y="380" />
+              <mxPoint x="835" y="380" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-edge-12" value="REST / условия" edge="1" parent="1" source="cell-offers" target="cell-suppliers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-12" value="Подбор для восстановления" edge="1" parent="1" source="cell-app" target="cell-offers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.28;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-13" value="Транзакции / очередь задач" edge="1" parent="1" source="cell-app" target="cell-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
+        <mxCell id="cell-edge-13" value="Поиск / проверка" edge="1" parent="1" source="cell-offers" target="cell-suppliers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cell-edge-14" value="Push/email из фонового обработчика" edge="1" parent="1" source="cell-app" target="cell-delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontSize=14;strokeWidth=1.3;exitX=0.06;exitY=1;entryX=1;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;" flow_kind="dependency" architecture_link="call">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="cell-edge-14" value="Диагностика / повтор" edge="1" parent="1" source="cell-operator" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0;entryY=0.55;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-15" value="Опрос / сверка" edge="1" parent="1" source="cell-app" target="cell-adapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.82;entryX=0;entryY=0.7;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" x="-0.6">
             <Array as="points">
-              <mxPoint x="450" y="810" />
-              <mxPoint x="280" y="810" />
-              <mxPoint x="280" y="1060" />
+              <mxPoint x="1030" y="710" />
+              <mxPoint x="1030" y="865" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cell-scope" value="Приложение и обработчики относятся к Alfred&#10;PostgreSQL принадлежит Alfred; отдельного брокера нет" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;align=center;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="390" y="1050" width="800" height="65" as="geometry" />
+        <mxCell id="cell-edge-16" value="Событие статуса" edge="1" parent="1" source="cell-adapter" target="cell-app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0;exitY=0.23;entryX=1;entryY=0.84;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#a46b20;" flow_kind="dependency" architecture_link="event">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1005" y="805" />
+              <mxPoint x="1005" y="640" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="cell-legend" value="Стрелка направлена к вызываемому интерфейсу | «event»: доставка события в указанном направлении&#10;Подключение поездок и синхронизация контекста: фоновый опрос Booking.tracked_trips / context&#10;Покупки, платежи и паспорта остаются в booking-контуре TravelTech | Внутренние компоненты Alfred показаны на уровне 2" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;spacing=6;fontFamily=Arial;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="30" y="1260" width="2100" height="95" as="geometry" />
+        <mxCell id="cell-edge-17" value="Webhook" edge="1" parent="1" source="cell-provider" target="cell-adapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0;exitY=0.25;entryX=1;entryY=0.25;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#a46b20;" flow_kind="dependency" architecture_link="event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-18" value="Status API" edge="1" parent="1" source="cell-adapter" target="cell-provider" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=1;exitY=0.8;entryX=0;entryY=0.8;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-19" value="Транзакции / задачи" edge="1" parent="1" source="cell-app" target="cell-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cell-edge-20" value="Push / email" edge="1" parent="1" source="cell-app" target="cell-delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;whiteSpace=nowrap;fontSize=12;labelBackgroundColor=#ffffff;jettySize=20;fontFamily=Arial;fontSize=13;strokeWidth=1.2;exitX=0.07;exitY=1;entryX=1;entryY=0.5;dashed=1;endArrow=open;strokeColor=#566573;strokeColor=#53677b;" flow_kind="dependency" architecture_link="call">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="710" />
+              <mxPoint x="280" y="875" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell-legend" value="Пунктир: вызов контракта, ответ возвращается вызывающему | Оранжевый: доставка события&#10;Первоначальный поиск и Alfred используют общие правила; покупки и паспорта остаются в booking-контуре" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=15;spacing=6;fontSize=13;fontColor=#65788a;" vertex="1" parent="1">
+          <mxGeometry x="25" y="1115" width="1850" height="42" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
